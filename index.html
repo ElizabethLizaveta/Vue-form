@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue-form</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+  <link media="all" rel="stylesheet" href="assets/css/vendor.min.css">
+  <link media="all" rel="stylesheet" href="assets/css/style.min.css">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="container">
+      <div id="form-app">
+        <form class="vue-form" @submit.prevent="addInfo" v-show="formSteps[index] === 'main-info'">
+          <fieldset>
+            <legend><span class="number">1</span>Main Info</legend>
+            <div class="form-group">
+              <input class="form-control" type="text" placeholder="First Name" name="first-name"
+                v-bind:value="userInfo.firstName" v-on:input="userInfo.firstName = $event.target.value" v-validate
+                data-vv-rules="required|min:4">
+              <span v-show="errors.has('first-name')" class="error-message">{{ errors.first('first-name') }}</span>
+            </div>
+            <div class="form-group">
+              <input type="text" name="last-name" placeholder="Last Name" v-model="userInfo.lastName" v-validate
+                data-vv-rules="required|min:4">
+              <span v-show="errors.has('last-name')" class="error-message">{{ errors.first('last-name') }}</span>
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Email" v-model="userInfo.email" v-validate
+                data-vv-rules="required|email">
+              <span v-show="errors.has('email')" class="error-message">{{ errors.first('email') }}</span>
+            </div>
+            <div class="form-group">
+              <input type="text" name="age" placeholder="Age" v-model="userInfo.age" v-validate
+                data-vv-rules="numeric|min_value:1">
+              <span v-show="errors.has('age')" class="error-message">{{ errors.first('age') }}</span>
+            </div>
+            <div class="form-group">
+              <input type="text" name="skype" placeholder="Skype" v-model="userInfo.skype" v-validate
+                data-vv-rules="min:4|max:20">
+              <span v-show="errors.has('skype')" class="error-message">{{ errors.first('skype') }}</span>
+            </div>
+          </fieldset>
+          <fieldset>
+            <button class="btn next-btn" :disabled="errors.any()">Next<i class="icon-arrow-left"></i></button>
+          </fieldset>
+        </form>
+        <form class="vue-form" @submit.prevent="addInfo" v-show="formSteps[index] === 'additional-info'">
+          <fieldset>
+            <legend><span class="number">2</span>Additional Info</legend>
+            <div class="form-group">
+              <input type="text" name="hobby" placeholder="Hobby" v-model="userInfo.hobby">
+            </div>
+            <div class="form-group">
+              <input type="text" name="phone" placeholder="Phone" v-model="userInfo.phone">
+            </div>
+            <div class="form-group">
+              <input type="text" name="nickname" placeholder="Nickname" v-model="userInfo.nickname" v-validate
+                data-vv-rules="nickname">
+              <span v-show="errors.has('nickname')" class="error-message">{{ errors.first('nickname') }}</span>
+            </div>
+            <div class="row">
+              <button class="btn prev-btn" type="button" @click="back"><i class="icon-arrow-right"></i>Back</button>
+              <button class="btn add-btn">Add info</button>
+            </div>
+          </fieldset>
+        </form>
+
+        <table width="100%">
+          <tbody>
+            <tr v-show="users.length">
+              <td>First Name</td>
+              <td>Last Name</td>
+              <td>Email</td>
+              <td>Age</td>
+              <td>Skype</td>
+            </tr>
+            <tr v-for="(user, index) in users">
+              <td>{{user.firstName}}</td>
+              <td>{{user.lastName}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.age}}</td>
+              <td>{{user.skype}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/vendor.min.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+</body>
+
+</html>
