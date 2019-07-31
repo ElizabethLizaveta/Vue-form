@@ -46,7 +46,7 @@
             </div>
           </fieldset>
           <fieldset>
-            <button class="btn next-btn" :disabled="errors.any()">Next<i class="icon-arrow-left"></i></button>
+            <button class="next-btn" :disabled="errors.any()">Next<i class="icon-arrow-left"></i></button>
           </fieldset>
         </form>
         <form class="vue-form" @submit.prevent="addInfo" v-show="formSteps[index] === 'additional-info'">
@@ -63,10 +63,10 @@
                 data-vv-rules="nickname">
               <span v-show="errors.has('nickname')" class="error-message">{{ errors.first('nickname') }}</span>
             </div>
-            <div class="row">
-              <button class="btn prev-btn" type="button" @click="back"><i class="icon-arrow-right"></i>Back</button>
-              <button class="btn add-btn">Add info</button>
-            </div>
+          </fieldset>
+          <fieldset class="btn-group">
+            <button class="prev-btn" type="button" @click="back"><i class="icon-arrow-right"></i>Back</button>
+            <button class="add-btn">Add info</button>
           </fieldset>
         </form>
 
@@ -88,8 +88,8 @@
             </tr>
           </tbody>
         </table>
-      </div>
     </div>
+  </div>
   </div>
   <script src="assets/js/vendor.min.js" defer></script>
   <script src="assets/js/app.js" defer></script>
